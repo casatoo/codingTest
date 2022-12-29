@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.KMS.java.codingTest.repository.CompanyRepository">
+
+	<select id="getCompanysData" resultType="Company">
+		SELECT * FROM Companys 
+		WHERE companyName LIKE '%${companyName}%'
+		AND ceoName LIKE '%${ceoName}%'
+		<if test="companyId !=0">
+			AND companyId = #{companyId}
+		</if>
+		ORDER BY companyId DESC;
+	</select>
+	
+	
+	<select id="getCompanyCountData" resultType="int">
+		SELECT COUNT(*)
+		FROM `Companys`
+	</select>
+	
+</mapper>

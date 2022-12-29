@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.KMS.java.codingTest.repository.ProductRepository">
+
+	<select id="getProductsData" resultType="Product">
+		SELECT P.*,C.companyName AS extra__companyName
+		FROM `Products` AS P 
+		INNER JOIN Companys AS C 
+		ON C.companyId = P.companyId 
+		AND P.productName LIKE '%${productName}%'
+		<if test="productId !=0">
+			AND P.productId = #{productId}
+		</if>
+		<if test="companyId !=0">
+			AND C.companyId = #{companyId}
+		</if>
+		ORDER BY P.productId DESC;
+	</select>
+	
+	
+	<select id="getProductCountData" resultType="int">
+		SELECT COUNT(*)
+		FROM `Products`
+	</select>
+	
+</mapper>

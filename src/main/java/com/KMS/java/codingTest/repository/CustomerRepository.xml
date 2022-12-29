@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.KMS.java.codingTest.repository.CustomerRepository">
+
+	<select id="getCustomersData" resultType="Customer">
+		SELECT customerId,
+		customerName,
+		CONCAT(SUBSTR(phoneNumber,1,10),'**',SUBSTR(phoneNumber,13,1)) AS phoneNumber 
+		FROM Customers 
+		WHERE customerName LIKE '%${customerName}%'
+		<if test="customerId !=0">
+			AND customerId = #{customerId}
+		</if>
+		ORDER BY customerId DESC;
+	</select>
+	
+	
+	<select id="getCustomerCountData" resultType="int">
+		SELECT COUNT(*)
+		FROM `Customers`
+	</select>
+	
+</mapper>

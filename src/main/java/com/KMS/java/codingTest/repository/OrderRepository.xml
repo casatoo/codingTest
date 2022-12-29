@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.KMS.java.codingTest.repository.OrderRepository">
+
+	<select id="getOrdersData" resultType="Order">
+		SELECT 
+		A.orderId AS orderId,
+		A.regDate AS regDate,
+		A.payment AS payment,
+		A.quantity AS quantity,
+		A.customerName AS extra__customerName,
+		B.productName AS extra__productName,
+		B.companyName AS extra__companyName,
+		B.price AS extra__price
+		FROM 
+			(SELECT
+			O.orderId ,
+			O.productId,
+			O.payment,
+			O.regDate,
+			O.quantity,
+			C.customerName,
+			C.phoneNumber,
+			C.customerId
+			FROM Orders AS O 
+			INNER JOIN Customers AS C 
+			ON O.customerId = C.customerId) AS A 
+		INNER JOIN 
+			(SELECT 
+			P.productId,
+			P.productName,
+			P.price,
+			C.companyName 
+			FROM Products AS P 
+			INNER JOIN Companys AS C 
+			ON P.productId = C.CompanyId) AS B
+		ON A.productId = B.productId
+		 AND A.customerName LIKE '%${customerName}%'
+		 AND B.productName LIKE '%${productName}%'
+		 AND B.companyName LIKE '%${companyName}%'
+		 <if test="orderId !=0">
+		 	AND A.orderId = #{orderId}
+		 </if>
+		 <if test="productId !=0">
+		 	AND A.productId = #{productId}
+		 </if>
+		 <if test="customerId !=0">
+		 	AND A.customerId = #{customerId}
+		 </if>
+	</select>
+	
+	
+	<select id="getOrderCountData" resultType="int">
+		SELECT COUNT(*)
+		FROM `Orders`
+	</select>
+	
+</mapper>
