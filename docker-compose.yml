@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: casatoo/mysql:8.0
+#    volumes:
+#     - ./mysql-init-files/:/docker-entrypoint-initdb.d/
+    restart: always
+    container_name: mysql
+    environment:
+     - MYSQL_ALLOW_EMPTY_PASSWORD="true"
+
+    ports:
+     - '3306:3306'
+    expose:
+     - 3306

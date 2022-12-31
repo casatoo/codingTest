@@ -45,6 +45,7 @@ public class CodingTestController {
 		return rd;
 	}
 	
+	
 	@RequestMapping("/usr/get/CompanysData")
 	@ResponseBody
 	public <DT> ResultData<DT> CompanysData(
