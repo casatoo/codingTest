@@ -295,7 +295,7 @@ http://[아이피주소]:8080/usr/Orders/getOrderData?orderId=1&productId=1&cust
 
 # 데이터 입력
 
-## 상품등록
+## 상품 등록
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
@@ -309,12 +309,12 @@ http://[아이피주소]:8080/usr/Orders/getOrderData?orderId=1&productId=1&cust
 http://[아이피주소]:8080/usr/products/createProductData?productName=[상품이름]&price=[상품가격]&companyId=[등록업체번호]
 ```
 
-## 업체등록
+## 업체 등록
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
 |---|---|---|---|---|
-|companyName|상등록업체명품이름|VARCHAR|200|1|
+|companyName|등록업체이름|VARCHAR|200|1|
 |ceoName|업체대표자명|VARCHAR|50|1|
 |phoneNumber|전화번호|VARCHAR|20|1|
 
@@ -323,7 +323,7 @@ http://[아이피주소]:8080/usr/products/createProductData?productName=[상품
 http://[아이피주소]:8080/usr/Companys/createCompanyData?companyName=[등록업체명]&ceoName=[업체대표자명]&phoneNumber=[전화번호]
 ```
 
-## 고객등록
+## 고객 등록
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
@@ -336,7 +336,7 @@ http://[아이피주소]:8080/usr/Companys/createCompanyData?companyName=[등록
 http://[아이피주소]:8080/usr/Customers/createCustomerData?customerName=[고객이름]&phoneNumber=[고객전화번호]
 ```
 
-## 구매정보등록
+## 구매정보 등록
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
@@ -349,4 +349,65 @@ http://[아이피주소]:8080/usr/Customers/createCustomerData?customerName=[고
 ※ 항목구분: 필수(1), 옵션(0)
 ```
 http://[아이피주소]:8080/usr/Orders/createOrderData?productId=[상품번호]&customerId=[구매자]&payment=[금액]&quantity=[구매수량]
+```
+
+# 데이터 수정
+
+## 상품정보 수정
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|
+|productId|상품번호|INT UNSIGNED|0~4294967295|1|
+|productName|상품명|VARCHAR|200|0|
+|price|가격|INT UNSIGNED|0~4294967295|0|
+|companyId|등록업체번호|INT UNSIGNED|0~4294967295|0|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/products/modifyProductData?productId=[상품번호]&productName=[상품명]&price=[가격]&companyId=[등록업체번호]
+```
+
+## 업체정보 수정
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|
+|CompanyId|등록업체번호|INT UNSIGNED|0~4294967295|1|
+|companyName|등록업체명|VARCHAR|200|0|
+|ceoName|업체대표자명|VARCHAR|50|0|
+|phoneNumber|전화번호|VARCHAR|20|0|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/Companys/modifyCompanyData?CompanyId=[등록업체번호]&companyName=[등록업체명]&ceoName=[업체대표자명]&phoneNumber=[전화번호]
+```
+## 고객정보 수정
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|
+|customerId|고객번호|INT UNSIGNED|0~4294967295|1|
+|customerName|고객이름|VARCHAR|50|0|
+|phoneNumber|고객전화번호|VARCHAR|20|0|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/Customers/modifyCustomerData?customerId=[고객번호]&customerName=[고객이름]&phoneNumber=[고객전화번호]
+```
+
+## 구매정보 수정
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|
+|orderId|구매번호|INT UNSIGNED|0~4294967295|1|
+|productId|상품번호|INT UNSIGNED|0~4294967295|0|
+|customerId|고객번호|INT UNSIGNED|0~4294967295|0|
+|payment|구매금액|INT UNSIGNED|0~4294967295|0|
+|quantity|구매수량|INT UNSIGNED|0~4294967295|0|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/Orders/modifyOrderData?orderId=[구매번호]&productId=[상품번호]&customerId=[고객번호]&payment=[구매금액]&quantity=[구매수량]
 ```
