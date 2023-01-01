@@ -57,4 +57,35 @@
 		FROM `Orders`
 	</select>
 	
+	<insert id="createOrderData">
+		INSERT INTO Orders
+		SET productId = #{productId},
+		customerId = #{customerId},
+		regDate = NOW(),
+		payment = #{payment},
+		quantity = #{quantity}
+	</insert>
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getOrderDataByOrderId" resultType="Order">
+		SELECT *
+		FROM `Orders`
+		WHERE orderId = #{orderId}
+	</select>
+	
+	<update id="modifyOrderData">
+		UPDATE `Orders`
+		<set>
+			updateDate = NOW(),
+			<if test="productId != 0">`productId` = #{productId},</if>
+			<if test="customerId != 0">`customerId` = #{customerId},</if>
+			<if test="payment != 0">`payment` = #{payment},</if>
+			<if test="quantity != 0">`quantity` = #{quantity}</if>
+		</set>
+		WHERE orderId = #{orderId}
+	</update>
+	
 </mapper>

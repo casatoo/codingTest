@@ -13,6 +13,7 @@ public class Product {
 	private String productName;
 	private int price;
 	private String regDate;
+	private String updateDate;
 	private int companyId;
 
 	private String extra__companyName;

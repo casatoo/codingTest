@@ -4,7 +4,7 @@
 <mapper
 	namespace="com.KMS.java.codingTest.repository.CompanyRepository">
 
-	<select id="getCompanysData" resultType="Company">
+	<select id="getCompanyData" resultType="Company">
 		SELECT * FROM Companys 
 		WHERE companyName LIKE '%${companyName}%'
 		AND ceoName LIKE '%${ceoName}%'
@@ -19,5 +19,34 @@
 		SELECT COUNT(*)
 		FROM `Companys`
 	</select>
+	
+	<insert id="createComapnyData">
+		INSERT INTO Companys
+		SET companyName = #{companyName},
+		ceoName = #{ceoName},
+		regDate = NOW(),
+		phoneNumber = #{phoneNumber}
+	</insert>
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getComapnyDataByCompanyId" resultType="Company">
+		SELECT *
+		FROM `Companys`
+		WHERE companyId = #{companyId}
+	</select>
+	
+	<update id="modifyCompanyData">
+		UPDATE `Companys`
+		<set>
+			updateDate = NOW(),
+			<if test="companyName != null and companyName != ''">companyName = #{companyName},</if>
+			<if test="ceoName != null and ceoName != ''">`ceoName` = #{ceoName},</if>
+			<if test="phoneNumber != null and phoneNumber != ''">`phoneNumber` = #{phoneNumber}</if>
+		</set>
+		WHERE companyId = #{companyId}
+	</update>
 	
 </mapper>

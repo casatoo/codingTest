@@ -4,7 +4,7 @@
 <mapper
 	namespace="com.KMS.java.codingTest.repository.ProductRepository">
 
-	<select id="getProductsData" resultType="Product">
+	<select id="getProductData" resultType="Product">
 		SELECT P.*,C.companyName AS extra__companyName
 		FROM `Products` AS P 
 		INNER JOIN Companys AS C 
@@ -19,10 +19,52 @@
 		ORDER BY P.productId DESC;
 	</select>
 	
-	
 	<select id="getProductCountData" resultType="int">
 		SELECT COUNT(*)
 		FROM `Products`
 	</select>
+	
+	<insert id="createProductData">
+		INSERT INTO Products
+		SET productName = #{productName},
+		price = #{price},
+		regDate = NOW(),
+		companyId = #{companyId}
+	</insert>
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getProductDataByProductIdCompanyId" resultType="Product">
+		SELECT P.*,C.companyName AS extra__companyName
+		FROM `Products` AS P 
+		INNER JOIN Companys AS C 
+		ON C.companyId = P.companyId 
+		<if test="productId !=0">
+			AND P.productId = #{productId}
+		</if>
+		<if test="companyId !=0">
+			AND C.companyId = #{companyId}
+		</if>
+	</select>
+	
+	<select id="getProductDataByProductId" resultType="Product">
+		SELECT *
+		FROM `Products`
+		WHERE productId = #{productId}
+	</select>
+	
+	
+	<update id="modifyProductData">
+		UPDATE `Products`
+		<set>
+			updateDate = NOW(),
+			<if test="productName != null and productName != ''">productName = #{productName},</if>
+			<if test="price != 0">`price` = #{price},</if>
+			<if test="companyId != 0">`companyId` = #{companyId}</if>
+		</set>
+		WHERE productId = #{productId}
+	</update>
 	
 </mapper>

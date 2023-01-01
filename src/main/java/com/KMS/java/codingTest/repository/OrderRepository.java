@@ -14,4 +14,12 @@ public interface OrderRepository {
 
 	int getOrderCountData();
 
+	void createOrderData(int productId, int customerId, int payment, int quantity);
+
+	int getLastInsertId();
+
+	Order getOrderDataByOrderId(int orderId);
+
+	void modifyOrderData(int orderId, int productId, int customerId, int payment, int quantity);
+
 }

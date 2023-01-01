@@ -27,4 +27,21 @@ public class OrderService {
 		return orderRepository.getOrderCountData();
 	}
 
+	public void createOrderData(int productId, int customerId, int payment, int quantity) {
+		orderRepository.createOrderData(productId,customerId,payment,quantity);
+	}
+
+	public int getLastInsertId() {
+		return orderRepository.getLastInsertId();
+	}
+
+	public Order getOrderDataByOrderId(int orderId) {
+		return orderRepository.getOrderDataByOrderId(orderId);
+	}
+
+	public void modifyOrderData(int orderId, int productId, int customerId, int payment, int quantity) {
+		orderRepository.modifyOrderData(orderId,productId,customerId,payment,quantity);
+		return ;
+	}
+
 }

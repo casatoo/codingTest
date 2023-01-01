@@ -112,8 +112,8 @@ services:
 ```
 docker-compose up -d
 ```
-
-
+---
+# 데이터 조회
 ---
 ## product ( 상품정보 )
 
@@ -127,7 +127,7 @@ docker-compose up -d
 ※ 항목구분: 필수(1), 옵션(0)
 ```
 요청메세지
-http://127.0.0.1:8080/usr/get/ProductsData?productId=1&productName=화장품&companyId=1
+http://[아이피주소]:8080/usr/products/getProductData?productId=1&productName=화장품&companyId=1
 ```
 ```
 응답메세지
@@ -138,7 +138,8 @@ http://127.0.0.1:8080/usr/get/ProductsData?productId=1&productName=화장품&com
       "productId": 1,
       "productName": "화장품",
       "price": 20000,
-      "regDate": "2022-12-28 17:48:24",
+      "regDate": "2023-01-01 16:40:01",
+      "updateDate": null,
       "companyId": 1,
       "extra__companyName": "회사1"
     }
@@ -153,6 +154,7 @@ http://127.0.0.1:8080/usr/get/ProductsData?productId=1&productName=화장품&com
 |productName|물품이름|VARCHAR|200|1|화장품|
 |price|물품가격|INT UNSIGNED|0~4294967295|1|20000|
 |regDate|등록일자|DATETIME|---|1|---|
+|updateDate|수정일자|DATETIME|---|1|---|
 |companyId|등록업체번호|INT UNSIGNED|0~4294967295|1|1|
 |extra__companyName|등록업체명|VARCHAR|200|1|회사1|
 
@@ -169,7 +171,7 @@ http://127.0.0.1:8080/usr/get/ProductsData?productId=1&productName=화장품&com
 ※ 항목구분: 필수(1), 옵션(0)
 ```
 요청메세지
-http://127.0.0.1:8080/usr/get/CompanysData?companyName=3&companyId=13&ceoName=강대표
+http://[아이피주소]:8080/usr/Companys/getCompanyData?companyName=3&companyId=13&ceoName=강대표
 ```
 
 ```
@@ -181,7 +183,9 @@ http://127.0.0.1:8080/usr/get/CompanysData?companyName=3&companyId=13&ceoName=�
       "companyId": 13,
       "companyName": "회사13",
       "ceoName": "강대표",
-      "phoneNumber": "01016796068"
+      "phoneNumber": "010-1679-6068",
+      "regDate": "2023-01-01 16:40:01",
+      "updateDate": null
     }
   ]
 }
@@ -194,6 +198,8 @@ http://127.0.0.1:8080/usr/get/CompanysData?companyName=3&companyId=13&ceoName=�
 |companyName|등록업체명|VARCHAR|200|1|회사13|
 |ceoName|업체대표자명|VARCHAR|50|1|강대표|
 |phoneNumber|전화번호|VARCHAR|20|1|01016796068|
+|regDate|등록일자|DATETIME|---|1|---|
+|updateDate|수정일자|DATETIME|---|1|---|
 
 --- 
 ## customer (구매자)
@@ -207,7 +213,7 @@ http://127.0.0.1:8080/usr/get/CompanysData?companyName=3&companyId=13&ceoName=�
 ※ 항목구분: 필수(1), 옵션(0)
 ```
 요청메세지
-http://127.0.0.1:8080/usr/get/CustomersData?customerId=1&customerName=홍길동
+http://[아이피주소]:8080/usr/Customers/getCustomerData?customerId=1&customerName=홍길동
 ```
 
 ```
@@ -218,7 +224,9 @@ http://127.0.0.1:8080/usr/get/CustomersData?customerId=1&customerName=홍길동
     {
       "customerId": 1,
       "customerName": "홍길동",
-      "phoneNumber": "010-2349-1**6"
+      "phoneNumber": "010-2349-1**6",
+      "regDate": "2023-01-01 16:47:12",
+      "updateDate": null
     }
   ]
 }
@@ -230,7 +238,8 @@ http://127.0.0.1:8080/usr/get/CustomersData?customerId=1&customerName=홍길동
 |customerId|등록업체번호|INT UNSIGNED|0~4294967295|1|1|
 |customerName|등록업체명|VARCHAR|50|1|홍길동|
 |phoneNumber|업체대표자명|VARCHAR|50|1|010-2349-1**6|
-
+|regDate|등록일자|DATETIME|---|1|---|
+|updateDate|수정일자|DATETIME|---|1|---|
 --- 
 ## order (구매정보)
 
@@ -247,7 +256,7 @@ http://127.0.0.1:8080/usr/get/CustomersData?customerId=1&customerName=홍길동
 ※ 항목구분: 필수(1), 옵션(0)
 ```
 요청메세지
-http://127.0.0.1:8080/usr/get/OrdersData?orderId=1&productId=1&customerId=1&customerName=홍길동&productName=화장품&companyName=회사1
+http://[아이피주소]:8080/usr/Orders/getOrderData?orderId=1&productId=1&customerId=1&customerName=홍길동&productName=화장품&companyName=회사1
 ```
 
 ```
@@ -280,3 +289,61 @@ http://127.0.0.1:8080/usr/get/OrdersData?orderId=1&productId=1&customerId=1&cust
 |extra__productName|상품이름|VARCHAR|50|1|화장품|
 |extra__companyName|상품업체이름|VARCHAR|50|1|회사1|
 |extra__price|상품가격|0~4294967295|50|1|20000|
+
+
+# 데이터 입력
+
+## 상품등록
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|---|
+|productName|상품이름|VARCHAR|200|1|
+|price|상품가격|INT UNSIGNED|0~4294967295|1|
+|companyId|등록업체번호|INT UNSIGNED|0~4294967295|1|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/products/createProductData?productName=[상품이름]&price=[상품가격]&companyId=[등록업체번호]
+```
+## 업체등록
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|---|
+|companyName|상등록업체명품이름|VARCHAR|200|1|
+|ceoName|업체대표자명|VARCHAR|50|1|
+|phoneNumber|전화번호|VARCHAR|20|1|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/Companys/createCompanyData?companyName=[등록업체명]&ceoName=[업체대표자명]&phoneNumber=[전화번호]
+```
+
+## 고객등록
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|---|
+|customerName|고객이름|VARCHAR|50|1|
+|phoneNumber|고객전화번호|VARCHAR|20|1|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/Customers/createCustomerData?customerName=[고객이름]&phoneNumber=[고객전화번호]
+```
+
+## 구매정보등록
+
+### 요청 메세지 명세
+|항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
+|---|---|---|---|---|---|
+|productId|상품번호|INT UNSIGNED|0~4294967295|1|
+|customerId|구매자|INT UNSIGNED|0~4294967295|1|
+|payment|금액|INT UNSIGNED|0~4294967295|1|
+|quantity|구매수량|INT UNSIGNED|0~4294967295|1|
+
+※ 항목구분: 필수(1), 옵션(0)
+```
+http://[아이피주소]:8080/usr/Orders/createOrderData?productId=[상품번호]&customerId=[구매자]&payment=[금액]&quantity=[구매수량]
+```

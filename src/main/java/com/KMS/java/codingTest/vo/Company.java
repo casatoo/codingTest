@@ -13,5 +13,7 @@ public class Company {
 	private String companyName;
 	private String ceoName;
 	private String phoneNumber;
+	private String regDate;
+	private String updateDate;
 
 }

@@ -7,7 +7,9 @@
 	<select id="getCustomersData" resultType="Customer">
 		SELECT customerId,
 		customerName,
-		CONCAT(SUBSTR(phoneNumber,1,10),'**',SUBSTR(phoneNumber,13,1)) AS phoneNumber 
+		CONCAT(SUBSTR(phoneNumber,1,10),'**',SUBSTR(phoneNumber,13,1)) AS phoneNumber,
+		regDate,
+		updateDate
 		FROM Customers 
 		WHERE customerName LIKE '%${customerName}%'
 		<if test="customerId !=0">
@@ -20,6 +22,40 @@
 	<select id="getCustomerCountData" resultType="int">
 		SELECT COUNT(*)
 		FROM `Customers`
+	</select>
+	
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<insert id="createCustomerData">
+		INSERT INTO Customers
+		SET customerName = #{customerName},
+		phoneNumber = #{phoneNumber},
+		regDate = NOW()
+	</insert>
+	
+	<select id="getProductDataByProductId" resultType="Customer">
+		SELECT *
+		FROM `Customers`
+		WHERE customerId = #{customerId}
+	</select>
+	
+	<update id="modifyCustomerData">
+		UPDATE `Customers`
+		<set>
+			updateDate = NOW(),
+			<if test="customerName != null and customerName != ''">customerName = #{customerName},</if>
+			<if test="phoneNumber != null and phoneNumber != ''">`phoneNumber` = #{phoneNumber}</if>
+		</set>
+		WHERE customerId = #{customerId}
+	</update>
+	
+	<select id="getCustomerDataByCustomerId" resultType="Customer">
+		SELECT *
+		FROM `Customers`
+		WHERE customerId = #{customerId}
 	</select>
 	
 </mapper>

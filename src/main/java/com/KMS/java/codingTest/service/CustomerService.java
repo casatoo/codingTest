@@ -20,9 +20,30 @@ public class CustomerService {
 	public List<Customer> getCustomersData(int customerId, String customerName) {
 		return customerRepository.getCustomersData(customerId,customerName);
 	}
+	
+	public int getLastInsertId() {
+		return customerRepository.getLastInsertId();
+	}
 
 	public int getCustomerCountData() {
 		return customerRepository.getCustomerCountData();
+	}
+
+	public void createCustomerData(String customerName, String phoneNumber) {
+		customerRepository.createCustomerData(customerName,phoneNumber);
+		
+	}
+
+	public Customer getComapnyDataByCompanyId(int customerId) {
+		return customerRepository.getComapnyDataByCompanyId(customerId);
+	}
+
+	public void modifyCustomerData(int customerId, String customerName, String phoneNumber) {
+		customerRepository.modifyCustomerData(customerId,customerName,phoneNumber);
+	}
+
+	public Customer getCustomerDataByCustomerId(int customerId) {
+		return customerRepository.getCustomerDataByCustomerId(customerId);
 	}
 
 }

@@ -12,5 +12,6 @@ public class Customer {
 	private int customerId;
 	private String customerName;
 	private String phoneNumber;
-
+	private String regDate;
+	private String updateDate;
 }

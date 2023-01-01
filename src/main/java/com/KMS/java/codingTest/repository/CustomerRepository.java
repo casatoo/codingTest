@@ -13,5 +13,15 @@ public interface CustomerRepository {
 	List<Customer> getCustomersData(int customerId, String customerName);
 
 	int getCustomerCountData();
+	
+	int getLastInsertId();
+
+	void createCustomerData(String customerName, String phoneNumber);
+
+	Customer getComapnyDataByCompanyId(int customerId);
+
+	void modifyCustomerData(int customerId, String customerName, String phoneNumber);
+
+	Customer getCustomerDataByCustomerId(int customerId);
 
 }

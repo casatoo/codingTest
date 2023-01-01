@@ -17,12 +17,36 @@ public class ProductService {
 		this.productRepository = productRepository;
 	}
 
-	public List<Product> getProductsData(int productId, String productName, int companyId) {
-		return productRepository.getProductsData(productId,productName,companyId);
+	public List<Product> getProductData(int productId, String productName, int companyId) {
+		return productRepository.getProductData(productId,productName,companyId);
 	}
 
 	public int getProductCountData() {
 		return productRepository.getProductCountData();
+	}
+
+	public void createProductData(String productName, int price, int companyId) {
+			productRepository.createProductData(productName,price,companyId);
+		return ;
+		
+	}
+
+	public int getLastInsertId() {
+		return productRepository.getLastInsertId();
+	}
+
+	public void modifyProductData(int productId, String productName, int price, int companyId) {
+		productRepository.modifyProductData(productId,productName,price,companyId);
+		return;
+	}
+
+	public Product getProductDataByProductIdCompanyId(int productId,int companyId) {
+		return productRepository.getProductDataByProductIdCompanyId(productId,companyId);
+	}
+
+	public Product getProductDataByProductId(int productId) {
+		
+		return productRepository.getProductDataByProductId(productId);
 	}
 
 }
