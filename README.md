@@ -1,3 +1,106 @@
+# Docker를 활용한 서버 제작
+- VirtureBox Linux CentOs7 가상환경에서 테스트 진행하였습니다.
+
+- 네트워크 세팅
+  - 
+## dockerfile
+- mysql
+```
+FROM mysql:8.0
+
+ADD ./mysql-init-files /docker-entrypoint-initdb.d
+
+CMD ["mysqld"]
+```
+- 이미지생성 시 query가 자동으로 실행될 수 있도록 함
+- dockerfile 과 같은 폴더에 mysql-init-files 폴더 생성
+- mysql-init-files 안에 create.sql 생성 테스트데이터 입력
+
+- spring
+```
+FROM openjdk:18.0
+
+COPY codingTest-0.0.1-SNAPSHOT.war ./
+
+CMD java -jar codingTest-0.0.1-SNAPSHOT.war
+```
+- openjdk:18.0 환경으로 실행 이미지 생성
+
+## 세팅법
+
+- 필수 설치 vim, docker, docker-compose
+
+- docker image 다운로드
+```
+docker pull casatoo/springimg
+docker pull casatoo/mysql:8.0
+```
+- mysql 환경설정파일 생성(한글사용 시 글씨깨짐 방지)
+```
+cd /
+mkdir mysql
+cd mysql
+vim my.cnf
+```
+- my.cnf
+```
+[client]
+default-character-set=utf8mb4
+
+[mysql]
+default-character-set=utf8mb4
+
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+skip-character-set-client-handshake
+
+!includedir /etc/my.cnf.d
+```
+- 붙여넣기 후 :wq 로 저장
+- docker-compose.yml 작성
+```
+cd /
+mkdir docker-compose
+cd docker-compose
+vim docker-compose.yml
+```
+- docker-compose.yml
+```
+version: '3'
+
+services:
+  mysqldb:
+    image: casatoo/mysql:8.0
+    restart: always
+    container_name: mysqldb
+    environment:
+      MYSQL_DATABASE: codingTest
+      MYSQL_ROOT_PASSWORD: "1234"
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - '3306:3306'
+    volumes:
+      - /database/:/var/lib/mysql
+      - /mysql/my.cnf:/etc/mysql/my.cnf
+  spring:
+    image: casatoo/springimg
+    restart: always
+    container_name: spring
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:log4jdbc:mysql://mysqldb:3306/codingTest?useUnicode=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysqldb
+```
+- docker-compose 실행
+```
+docker-compose up -d
+```
+
 
 ---
 ## product ( 상품정보 )
