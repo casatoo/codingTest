@@ -30,6 +30,13 @@ public class CodingTestController {
 	@Autowired
 	private OrderService orderService;
 	
+	@RequestMapping("/usr/home/main")
+	public String ProductsData() {
+		
+		return "/usr/home/main";
+	}
+	
+	
 	@RequestMapping("/usr/get/ProductsData")
 	@ResponseBody
 	public <DT> ResultData<DT> ProductsData(
