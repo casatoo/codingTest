@@ -69,7 +69,7 @@ public class OrdersDataController {
 		
 		int orderrCount = orderService.getOrderCountData();
 		
-		Order order = orderService.getOrderDataByOrderId(orderId);
+		List<Order> order = orderService.getOrdersData(orderId,productId,customerId,"","","");
 				
 		ResultData<DT> rd = ResultData.from(orderrCount,order);	
 		return rd;
