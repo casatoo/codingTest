@@ -9,6 +9,8 @@
 ## MVC 패턴
 ![image](./MVC.png)
 
+## ERD
+![image](./ERD.png)
 
 ## 네트워크 세팅
   ![image](./virtualBoxSetting.png)
