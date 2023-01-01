@@ -297,7 +297,7 @@ http://[아이피주소]:8080/usr/Orders/getOrderData?orderId=1&productId=1&cust
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 |productName|상품이름|VARCHAR|200|1|
 |price|상품가격|INT UNSIGNED|0~4294967295|1|
 |companyId|등록업체번호|INT UNSIGNED|0~4294967295|1|
@@ -306,11 +306,12 @@ http://[아이피주소]:8080/usr/Orders/getOrderData?orderId=1&productId=1&cust
 ```
 http://[아이피주소]:8080/usr/products/createProductData?productName=[상품이름]&price=[상품가격]&companyId=[등록업체번호]
 ```
+
 ## 업체등록
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 |companyName|상등록업체명품이름|VARCHAR|200|1|
 |ceoName|업체대표자명|VARCHAR|50|1|
 |phoneNumber|전화번호|VARCHAR|20|1|
@@ -324,7 +325,7 @@ http://[아이피주소]:8080/usr/Companys/createCompanyData?companyName=[등록
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 |customerName|고객이름|VARCHAR|50|1|
 |phoneNumber|고객전화번호|VARCHAR|20|1|
 
@@ -337,7 +338,7 @@ http://[아이피주소]:8080/usr/Customers/createCustomerData?customerName=[고
 
 ### 요청 메세지 명세
 |항목명(영문)|항목명(국문)|항목타입|항목크기|항목구분|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 |productId|상품번호|INT UNSIGNED|0~4294967295|1|
 |customerId|구매자|INT UNSIGNED|0~4294967295|1|
 |payment|금액|INT UNSIGNED|0~4294967295|1|
