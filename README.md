@@ -7,9 +7,9 @@
   - [카페24개인가상서버] (1.234.44.77:8080/usr/get/ProductsData)
 
 - 네트워크 세팅
-  ![poster](READMEimage/virtualBoxSetting.png)
-  ![poster](READMEimage/ipaddr.png)
-  ![poster](READMEimage/Applicationyml.png)
+  ![image](READMEimage/virtualBoxSetting.png)
+  ![image](READMEimage/ipaddr.png)
+  ![image](READMEimage/Applicationyml.png)
 
 ## dockerfile
 - mysql
