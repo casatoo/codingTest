@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KMS.java.codingTest.service.OrderService;
-import com.KMS.java.codingTest.vo.Company;
 import com.KMS.java.codingTest.vo.Order;
 import com.KMS.java.codingTest.vo.ResultData;
 

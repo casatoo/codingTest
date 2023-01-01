@@ -1,10 +1,14 @@
 # Docker를 활용한 서버 제작
+
+- [개인서버배포주소] (http://1.234.44.77:8080/usr/products/getProductData?productId=1&productName=%ED%99%94%EC%9E%A5%ED%92%88&companyId=1)
+
 ### VirtureBox Linux CentOs7 가상환경에서 테스트 진행하였습니다.
 
 ### dockerhub
   - [mysql](https://hub.docker.com/r/casatoo/mysql)
   - [springimg](https://hub.docker.com/r/casatoo/springimg)
-  - [카페24개인가상서버] (http://1.234.44.77:8080/usr/get/ProductsData)
+
+
 
 ## MVC 패턴
 ![image](./MVC.png)
@@ -102,7 +106,7 @@ services:
     restart: always
     container_name: spring
     environment:
-      SPRING_DATASOURCE_URL: jdbc:log4jdbc:mysql://mysqldb:3306/codingTest?useUnicode=true
+      SPRING_DATASOURCE_URL: jdbc:log4jdbc:mysql://:3306/codingTest?useUnicode=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     ports:

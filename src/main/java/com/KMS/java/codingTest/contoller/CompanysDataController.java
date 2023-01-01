@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KMS.java.codingTest.service.CompanyService;
-import com.KMS.java.codingTest.service.ProductService;
 import com.KMS.java.codingTest.vo.Company;
-import com.KMS.java.codingTest.vo.Product;
 import com.KMS.java.codingTest.vo.ResultData;
 
 @Controller
