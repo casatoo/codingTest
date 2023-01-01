@@ -1,12 +1,16 @@
 # Docker를 활용한 서버 제작
-- VirtureBox Linux CentOs7 가상환경에서 테스트 진행하였습니다.
+### VirtureBox Linux CentOs7 가상환경에서 테스트 진행하였습니다.
 
-- dockerhub
+### dockerhub
   - [mysql](https://hub.docker.com/r/casatoo/mysql)
   - [springimg](https://hub.docker.com/r/casatoo/springimg)
-  - [카페24개인가상서버] (1.234.44.77:8080/usr/get/ProductsData)
+  - [카페24개인가상서버] (http://1.234.44.77:8080/usr/get/ProductsData)
 
-- 네트워크 세팅
+## MVC 패턴
+![image](./MVC.png)
+
+
+## 네트워크 세팅
   ![image](./virtualBoxSetting.png)
   ![image](./ipaddr.png)
   ![image](./Applicationyml.png)
